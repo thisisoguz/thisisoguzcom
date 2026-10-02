@@ -1,6 +1,6 @@
 # Adding photos
 
-Original iPhone HEIC files should not be served directly by the website. Convert each image to an optimized JPG or WebP before placing it under `public/photos`.
+Original source images should not be served directly by the website. Convert each image to an optimized JPG or WebP before placing it under `public/photos`.
 
 Use a city-based folder structure:
 
@@ -16,7 +16,7 @@ Before publishing, strip EXIF metadata, especially GPS coordinates and device in
 
 To publish a photo:
 
-1. Convert the HEIC original to JPG or WebP.
+1. Convert the original image to JPG or WebP.
 2. Put the converted file in `public/photos/<city>/`.
 3. Add one object to `content/photos.ts`.
 4. Set `imageUrl` and `thumbnailUrl` to public paths beginning with `/photos/`.
