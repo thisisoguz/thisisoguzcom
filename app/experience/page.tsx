@@ -4,6 +4,7 @@ import {
   languages,
   profile,
   resumeHeader,
+  skills,
   workExperience,
   type ResumeEntry,
 } from "@/content/experience";
@@ -13,7 +14,8 @@ import styles from "./experience.module.css";
 
 export const metadata = createMetadata({
   title: "Experience",
-  description: "The work experience, certificates, education and languages of Oguz Yilmaz.",
+  description:
+    "The profile, work experience, certifications, skills, education and languages of Oguz Yilmaz.",
   path: "/experience",
 });
 
@@ -34,7 +36,9 @@ export default function ExperiencePage() {
             </a>
           ))}
         </nav>
-        <p className={styles.location}>{resumeHeader.location}</p>
+        {resumeHeader.location && (
+          <p className={styles.location}>{resumeHeader.location}</p>
+        )}
       </header>
 
       <ResumeSection title="Profile">
@@ -45,8 +49,19 @@ export default function ExperiencePage() {
         <EntryList entries={workExperience} />
       </ResumeSection>
 
-      <ResumeSection title="Certificates">
+      <ResumeSection title="Certifications">
         <CertificateList certificates={certificates} />
+      </ResumeSection>
+
+      <ResumeSection title="Skills">
+        <dl className={styles.skills}>
+          {skills.map((group) => (
+            <div key={group.name}>
+              <dt>{group.name}</dt>
+              <dd>{group.skills.join(" · ")}</dd>
+            </div>
+          ))}
+        </dl>
       </ResumeSection>
 
       <ResumeSection title="Education">

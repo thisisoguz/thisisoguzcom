@@ -13,7 +13,12 @@ export function Hero() {
           <p>I am a tester. I test things, automate repetitive work, and look for the details people might miss.</p>
           <p>A light personal archive of my work, readings and photos.</p>
           <div className="hero-actions">
-            <Button href="/cv/oguz-yilmaz-cv.pdf">Visit CV</Button>
+            <Button
+              href="/cv/Oguz_Yilmaz_Resume.pdf"
+              download="Oguz_Yilmaz_Resume.pdf"
+            >
+              Visit CV
+            </Button>
             <Button href="mailto:yilmazoguz@outlook.com" variant="secondary">Contact Me</Button>
           </div>
           <SocialLinks />

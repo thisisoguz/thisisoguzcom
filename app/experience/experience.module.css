@@ -188,6 +188,33 @@
   text-decoration-color: currentColor;
 }
 
+.skills {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.skills div {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 10px 20px;
+}
+
+.skills dt {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.skills dd {
+  margin: 0;
+  color: #3f3f3f;
+  font-size: 14px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
 .certificateModal {
   position: fixed;
   inset: 0;
@@ -305,6 +332,11 @@
 
   .entryContent h3 {
     font-size: 17px;
+  }
+
+  .skills div {
+    grid-template-columns: 1fr;
+    gap: 2px;
   }
 
   .languages {

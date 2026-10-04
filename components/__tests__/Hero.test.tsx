@@ -12,7 +12,8 @@ describe("Hero", () => {
 
     const cvLink = screen.getByRole("link", { name: "Visit CV" });
     const contactLink = screen.getByRole("link", { name: "Contact Me" });
-    expect(cvLink).toHaveAttribute("href", "/cv/oguz-yilmaz-cv.pdf");
+    expect(cvLink).toHaveAttribute("href", "/cv/Oguz_Yilmaz_Resume.pdf");
+    expect(cvLink).toHaveAttribute("download", "Oguz_Yilmaz_Resume.pdf");
     expect(cvLink).toHaveClass("button--primary");
     expect(contactLink).toHaveAttribute("href", "mailto:yilmazoguz@outlook.com");
     expect(contactLink).toHaveClass("button--secondary");

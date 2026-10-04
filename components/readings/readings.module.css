@@ -1,0 +1,675 @@
+.readingsExperience {
+  --reading-page: #fafaf8;
+  --reading-panel: #ffffff;
+  --reading-border: #e7e7e2;
+  --reading-muted-border: #edede8;
+  --reading-text: #1f2933;
+  --reading-muted: #6b7280;
+  --reading-fill: #ddebde;
+  --reading-border-node: #afcdb3;
+  --reading-selected: #16885b;
+  --reading-ring: rgba(46, 173, 120, 0.22);
+  --reading-hover: #d3e5d5;
+  --source-fill: #efe4cf;
+  --source-border: #d8c4a1;
+  --source-selected: #b99048;
+  --source-ring: rgba(185, 144, 72, 0.22);
+  --source-hover: #e8d7b6;
+  --edge: #b8b8b0;
+  --source-edge: #c7ad7a;
+  --chip: #f4f4ef;
+  --chip-active: #ddebde;
+  min-width: 0;
+  margin-top: 36px;
+  color: var(--reading-text);
+}
+
+.filters {
+  padding: 14px 16px;
+  display: grid;
+  gap: 10px;
+  box-shadow: none;
+}
+.filterTopline {
+  display: flex;
+  align-items: end;
+  gap: 18px;
+}
+.searchField {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+.searchField > span,
+.filterLabel {
+  color: var(--reading-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.searchField input[type="search"] {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  padding: 0 11px;
+  border: 1px solid var(--reading-border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--reading-text);
+  font: inherit;
+  font-size: 13px;
+}
+.searchField input:focus-visible {
+  outline: 3px solid var(--reading-ring);
+  outline-offset: 1px;
+}
+.filterRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.filterLabel {
+  width: auto;
+  padding-top: 8px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.chips {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.chip {
+  min-height: 30px;
+  padding: 4px 10px;
+  border: 1px solid var(--reading-border);
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--reading-muted);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.3;
+  cursor: pointer;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+.chip:hover {
+  color: var(--reading-text);
+  border-color: var(--reading-border-node);
+}
+.chip:focus-visible {
+  outline: 3px solid var(--reading-ring);
+  outline-offset: 2px;
+}
+.activeChip {
+  border-color: var(--reading-border-node);
+  background: var(--chip-active);
+  color: var(--reading-text);
+}
+.sourceToggle {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--reading-border);
+  border-radius: 10px;
+  background: #fff;
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.sourceToggle input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--reading-selected);
+}
+.sourceToggle > span {
+  font-size: 12px !important;
+  color: var(--reading-muted);
+}
+
+.graphLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(340px, 30vw, 420px);
+  gap: 20px;
+  align-items: start;
+  margin-top: 18px;
+}
+.graphCard {
+  min-width: 0;
+  min-height: 770px;
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: none;
+}
+.graphToolbar {
+  min-height: 40px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.graphCount {
+  margin: 0 0 8px;
+  color: var(--reading-muted);
+  font-size: 12px;
+}
+.resetButton,
+.closeButton {
+  border: 1px solid var(--reading-border);
+  border-radius: 9px;
+  background: var(--reading-panel);
+  color: var(--reading-muted);
+  cursor: pointer;
+}
+.resetButton {
+  height: 38px;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 12px;
+}
+.resetButton:hover,
+.closeButton:hover {
+  border-color: var(--reading-border-node);
+  color: var(--reading-text);
+}
+.legend {
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  list-style: none;
+}
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--reading-muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.legendMark {
+  width: 15px;
+  height: 15px;
+  border: 1px solid;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+.legendReading {
+  background: var(--reading-fill);
+  border-color: var(--reading-border-node);
+}
+.legendSource {
+  width: 10px;
+  height: 10px;
+  background: var(--source-fill);
+  border-color: var(--source-border);
+}
+.legendLine {
+  width: 18px;
+  height: 1px;
+  background: var(--edge);
+  flex: 0 0 auto;
+}
+.graphViewport {
+  width: 100%;
+  height: 650px;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--reading-panel);
+}
+.graphSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  touch-action: none;
+  cursor: grab;
+}
+.graphSvg:active {
+  cursor: grabbing;
+}
+.edge {
+  stroke: var(--edge);
+  stroke-width: 1;
+  opacity: 0.42;
+  vector-effect: non-scaling-stroke;
+  transition:
+    stroke 160ms ease,
+    opacity 160ms ease,
+    stroke-width 160ms ease;
+}
+.sourceEdge {
+  stroke: var(--source-edge);
+  opacity: 0.45;
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.edgeHighlighted {
+  stroke: var(--reading-selected);
+  stroke-width: 1.5;
+  opacity: 0.85;
+}
+.edgeLabel rect {
+  fill: rgba(250, 250, 248, 0.86);
+}
+.edgeLabel text {
+  fill: var(--reading-muted);
+  font-family: var(--sans);
+  font-size: 24px;
+}
+.edgeHit {
+  stroke: transparent;
+  stroke-width: 14;
+  pointer-events: stroke;
+}
+.graphNode {
+  cursor: pointer;
+  outline: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: node-arrive 850ms cubic-bezier(0.18, 0.72, 0.24, 1) both;
+}
+.graphNode:focus-visible circle {
+  stroke: var(--reading-selected);
+  stroke-width: 3;
+}
+.readingNode circle {
+  fill: var(--reading-fill);
+  stroke: var(--reading-border-node);
+  stroke-width: 1.5;
+  transition:
+    fill 140ms ease,
+    stroke 140ms ease,
+    filter 140ms ease;
+}
+.readingNode:hover circle,
+.readingNode:focus-visible circle {
+  fill: var(--reading-hover);
+}
+.readingNode.nodeSelected circle {
+  stroke: var(--reading-selected);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 10px var(--reading-ring));
+}
+.readingNode.nodeRelated circle {
+  stroke: var(--reading-selected);
+  stroke-width: 2;
+}
+.nodeDimmed {
+  opacity: 0.45;
+}
+.readingNode:active,
+.sourceNode:active {
+  cursor: grabbing;
+}
+.sourceNode circle {
+  fill: var(--source-fill);
+  stroke: var(--source-border);
+  stroke-width: 1.25;
+  transition:
+    fill 140ms ease,
+    stroke 140ms ease,
+    filter 140ms ease;
+}
+.sourceNode:hover circle,
+.sourceNode:focus-visible circle {
+  fill: var(--source-hover);
+}
+.sourceNode.nodeSelected circle {
+  stroke: var(--source-selected);
+  stroke-width: 1.75;
+  filter: drop-shadow(0 0 8px var(--source-ring));
+}
+.sourceNode.nodeRelated circle {
+  stroke: var(--source-selected);
+}
+.readingLabel {
+  color: var(--reading-text);
+  font-family: var(--sans);
+  pointer-events: none;
+}
+.readingLabelTitle {
+  font-size: 28px;
+  font-weight: 700;
+}
+.readingLabelAuthor {
+  color: var(--reading-muted);
+  font-size: 24px;
+}
+.selectedReadingLabel {
+  overflow: visible;
+  pointer-events: none;
+}
+.selectedReadingLabelBlock {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--sans);
+}
+.selectedReadingLabelLeft {
+  align-items: flex-end;
+  text-align: right;
+}
+.selectedReadingLabelRight {
+  align-items: flex-start;
+  text-align: left;
+}
+.selectedReadingLabelTitle,
+.selectedReadingLabelAuthor {
+  max-width: 100%;
+  overflow: hidden;
+}
+.selectedReadingLabelTitle {
+  margin: 0 0 6px;
+  color: var(--reading-text);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.selectedReadingLabelAuthor {
+  margin: 0;
+  color: var(--reading-muted);
+  font-size: 24px;
+  line-height: 1.15;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.sourceLabel {
+  color: #4b5563;
+  font-family: var(--sans);
+  font-size: 24px;
+  font-weight: 600;
+  pointer-events: none;
+}
+.noResults {
+  min-height: 260px;
+  margin: 0;
+  color: var(--reading-muted);
+  display: grid;
+  place-items: center;
+}
+
+.detailPanel {
+  position: sticky;
+  top: 20px;
+  min-width: 0;
+  height: 770px;
+  max-height: calc(100svh - 40px);
+  padding: 24px;
+  overflow: auto;
+  box-shadow: none;
+}
+.detailHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.detailHeading .eyebrow {
+  margin: 0;
+}
+.closeButton {
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  line-height: 1;
+}
+.emptyState {
+  min-height: 240px;
+  margin: 16px 0 0;
+  color: var(--reading-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.emptyState h2 {
+  margin: 0;
+  color: var(--reading-text);
+  font-family: var(--sans);
+  font-size: 18px;
+}
+.emptyState p {
+  max-width: 280px;
+  margin: 9px 0 0;
+}
+.detailType {
+  margin: 14px 0 -8px;
+  color: var(--reading-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.detailContent h2 {
+  margin: 14px 0 0;
+  color: var(--reading-text);
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 650;
+  line-height: 1.28;
+  letter-spacing: -0.025em;
+}
+.localizedTitle {
+  margin: 5px 0 0;
+  color: var(--reading-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.author,
+.sourceType {
+  margin: 7px 0 0;
+  color: var(--reading-muted);
+  font-size: 14px;
+}
+.metadata {
+  margin: 19px 0 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--reading-muted-border);
+  border-bottom: 1px solid var(--reading-muted-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+.metadata div {
+  min-width: 0;
+}
+.metadata dt {
+  color: var(--reading-muted);
+  font-size: 11px;
+}
+.metadata dd {
+  margin: 4px 0 0;
+  color: var(--reading-text);
+  font-size: 13px;
+  text-transform: capitalize;
+  overflow-wrap: anywhere;
+}
+.detailSection {
+  margin-top: 17px;
+}
+.detailSection h3 {
+  margin: 0 0 8px;
+  color: var(--reading-muted);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+}
+.detailChips {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+}
+.detailChips li {
+  padding: 5px 9px;
+  border: 1px solid var(--reading-border);
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--reading-text);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.detailDescription {
+  margin: 10px 0 0;
+  color: var(--reading-text);
+  font-size: 14px;
+  line-height: 1.65;
+}
+.resultCount {
+  margin: 11px 2px 0;
+  color: var(--reading-muted);
+  font-size: 12px;
+}
+.screenReaderOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes node-arrive {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 900px) {
+  .graphLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .detailPanel {
+    position: static;
+    height: auto;
+    min-height: 220px;
+    max-height: 72svh;
+  }
+  .emptyState {
+    min-height: 100px;
+  }
+  .graphViewport {
+    height: 600px;
+  }
+}
+@media (max-width: 600px) {
+  .readingsExperience {
+    margin-top: 28px;
+  }
+  .filters {
+    padding: 14px;
+    gap: 10px;
+  }
+  .filterTopline {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .searchField {
+    width: 100%;
+  }
+  .searchField input[type="search"] {
+    font-size: 12px;
+  }
+  .sourceToggle {
+    min-height: 34px;
+    align-self: flex-start;
+    padding: 0 10px;
+  }
+  .filterRow {
+    gap: 8px;
+  }
+  .filterLabel {
+    padding-top: 7px;
+    font-size: 11px;
+  }
+  .chips {
+    gap: 6px;
+  }
+  .chip {
+    min-height: 28px;
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  .filterRow[aria-label="Threads"] .chip {
+    max-width: 100%;
+  }
+  .graphLayout {
+    gap: 12px;
+  }
+  .graphCard {
+    min-height: 540px;
+    padding: 14px;
+  }
+  .graphHeading {
+    padding: 0 3px;
+  }
+  .graphToolbar {
+    align-items: flex-start;
+  }
+  .legend {
+    gap: 7px 10px;
+    margin: 2px 0 8px;
+  }
+  .legend li {
+    font-size: 10px;
+  }
+  .graphViewport {
+    margin: 0 -2px;
+    width: calc(100% + 4px);
+    height: 520px;
+  }
+  .graphSvg {
+    width: 100%;
+    height: 520px;
+  }
+  .graphViewport {
+    overflow: hidden;
+  }
+  .detailPanel {
+    max-height: 72svh;
+    padding: 16px;
+    border-radius: 18px 18px 14px 14px;
+  }
+  .detailPanelSelected {
+    box-shadow: 0 -6px 24px rgba(31, 41, 51, 0.06);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .graphNode {
+    animation: none;
+  }
+  .edge,
+  .readingNode circle,
+  .sourceNode circle {
+    transition: none;
+  }
+}

@@ -1,18 +1,70 @@
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/PageShell";
-import { readingNodes } from "@/content/readings";
+import { readingThreads, readings } from "@/content/readings";
 import { createMetadata } from "@/lib/seo";
 
-export function generateStaticParams() { return readingNodes.map(({ slug }) => ({ slug })); }
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export function generateStaticParams() {
+  return readings.map(({ id }) => ({ slug: id }));
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const node = readingNodes.find((item) => item.slug === slug);
-  return node ? createMetadata({ title: node.title, description: node.description, path: `/readings/${node.slug}` }) : {};
+  const reading = readings.find((item) => item.id === slug);
+  return reading
+    ? createMetadata({
+        title: reading.title,
+        description: `${reading.title} by ${reading.author}.`,
+        path: `/readings/${reading.id}`,
+      })
+    : {};
 }
 
-export default async function ReadingDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ReadingDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const node = readingNodes.find((item) => item.slug === slug);
-  if (!node) notFound();
-  return <PageShell title={node.title} intro={node.description}><div className="experience-list"><article className="card experience-card"><p className="eyebrow">{node.type} · {node.subtitle}</p><p>This route is ready for longer notes. The reading data currently lives in <code>content/readings.ts</code>.</p></article></div></PageShell>;
+  const reading = readings.find((item) => item.id === slug);
+  if (!reading) notFound();
+  const threads = (reading.threadIds ?? [])
+    .map(
+      (threadId) =>
+        readingThreads.find((thread) => thread.id === threadId)?.title,
+    )
+    .filter((title): title is string => Boolean(title));
+  return (
+    <PageShell
+      title={reading.title}
+      intro={`${reading.format} by ${reading.author}.`}
+    >
+      <div className="experience-list">
+        <article className="card experience-card">
+          {reading.localizedTitle && (
+            <p className="experience-meta">{reading.localizedTitle}</p>
+          )}
+          <p className="experience-meta">
+            {reading.status.replace("-", " ")}
+            {reading.dateLabel ? ` · ${reading.dateLabel}` : ""}
+          </p>
+          {reading.discoveredVia && (
+            <p>Discovered via {reading.discoveredVia}.</p>
+          )}
+          {reading.whyRead && <p>{reading.whyRead}</p>}
+          {reading.note && <p>{reading.note}</p>}
+          {threads.length > 0 && (
+            <p className="experience-meta">Threads: {threads.join(" · ")}</p>
+          )}
+          {reading.themes.length > 0 && (
+            <p className="experience-meta">
+              Themes: {reading.themes.join(" · ")}
+            </p>
+          )}
+        </article>
+      </div>
+    </PageShell>
+  );
 }
